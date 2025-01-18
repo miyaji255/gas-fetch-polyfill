@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["@types/bun"]
+  },
+  "include": ["scripts"]
+}
