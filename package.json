@@ -7,6 +7,7 @@
   "packageManager": "pnpm@9.15.4",
   "files": ["LICENSE", "src", "dist", "README.md"],
   "scripts": {
+    "build": "bun scripts/esbuild.ts",
     "lint": "biome ci",
     "fmt": "biome check --write"
   },
@@ -24,30 +25,30 @@
   "exports": {
     ".": {
       "import": {
-        "default": "./dist/index.js",
-        "types": "./dist/esm/index.d.ts"
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/index.js"
       },
       "require": {
-        "default": "./dist/index.cjs",
-        "types": "./dist/cjs/index.d.ts"
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/index.cjs"
       },
       "default": {
-        "default": "./dist/index.js",
-        "types": "./dist/esm/index.d.ts"
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/index.js"
       }
     },
     "./ponyfill": {
       "import": {
-        "default": "./dist/ponyfill.js",
-        "types": "./dist/esm/ponyfill.d.ts"
+        "types": "./dist/esm/ponyfill.d.ts",
+        "default": "./dist/ponyfill.js"
       },
       "require": {
-        "default": "./dist/ponyfill.cjs",
-        "types": "./dist/cjs/ponyfill.d.ts"
+        "types": "./dist/cjs/ponyfill.d.ts",
+        "default": "./dist/ponyfill.cjs"
       },
       "default": {
-        "default": "./dist/ponyfill.js",
-        "types": "./dist/esm/ponyfill.d.ts"
+        "types": "./dist/esm/ponyfill.d.ts",
+        "default": "./dist/ponyfill.js"
       }
     }
   },
