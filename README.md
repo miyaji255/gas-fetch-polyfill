@@ -50,7 +50,7 @@ I bundled this so that there is no need to do any special configuration.
 
 ## Compatibilities
 
-**Request**
+[**Request**](https://developer.mozilla.org/en/docs/Web/API/Request)
 |                                         | Status             | Remarks                                                                            |
 | --------------------------------------- | ------------------ | ---------------------------------------------------------------------------------- |
 | `Request()` constructor                 | :white_check_mark: |                                                                                    |
@@ -78,7 +78,7 @@ I bundled this so that there is no need to do any special configuration.
 | `Request.prototype.json()`              | :white_check_mark: |                                                                                    |
 | `Request.prototype.text()`              | :white_check_mark: |                                                                                    |
 
-**Response**
+[**Response**](https://developer.mozilla.org/en/docs/Web/API/Response)
 |                                    | Status             | Remarks                                                                            |
 | ---------------------------------- | ------------------ | ---------------------------------------------------------------------------------- |
 | `Response()` constructor           | :white_check_mark: |                                                                                    |
@@ -102,7 +102,87 @@ I bundled this so that there is no need to do any special configuration.
 | `Response.prototype.json()`        | :white_check_mark: |                                                                                    |
 | `Response.prototype.text()`        | :white_check_mark: |                                                                                    |
 
+[**Headers**](https://developer.mozilla.org/en/docs/Web/API/Headers)
+|                                           | Status             | Remarks |
+| ----------------------------------------- | ------------------ | ------- |
+| `Headers()` constructor                   | :white_check_mark: |         |
+| [Symbol.iterator]                         | :white_check_mark: |         |
+| `Headers.prototype.append()`              | :white_check_mark: |         |
+| `Headers.prototype.delete()`              | :white_check_mark: |         |
+| `Headers.prototype.entries()`             | :white_check_mark: |         |
+| `Headers.prototype.forEach()`             | :white_check_mark: |         |
+| `Headers.prototype.get()`                 | :white_check_mark: |         |
+| `Headers.prototype.getSetCookie()`        | :x:                |         |
+| `Headers.prototype.has()`                 | :white_check_mark: |         |
+| Iteration combines duplicate header names | :white_check_mark: |         |
+| Iteration is lexicographically sorted     | :x:                |         |
+| `Headers.prototype.keys()`                | :white_check_mark: |         |
+| `Headers.prototype.set()`                 | :white_check_mark: |         |
+| `Headers.prototype.values()`              | :white_check_mark: |         |
 
+[**URL**](https://developer.mozilla.org/en/docs/Web/API/URL)
+|                              | Status             | Remarks |
+| ---------------------------- | ------------------ | ------- |
+| `URL()` constructor          | :white_check_mark: |         |
+| `URL.parse()`                | :x:                |         |
+| `URL.canParse()`             | :x:                |         |
+| `URL.createObjectURL()`      | :x:                |         |
+| `URL.revokeObjectURL()`      | :x:                |         |
+| `URL.prototype.hash`         | :white_check_mark: |         |
+| `URL.prototype.host`         | :x:                |         |
+| `URL.prototype.hostname`     | :white_check_mark: |         |
+| `URL.prototype.href`         | :white_check_mark: |         |
+| `URL.prototype.origin`       | :white_check_mark: |         |
+| `URL.prototype.password`     | :white_check_mark: |         |
+| `URL.prototype.pathname`     | :white_check_mark: |         |
+| `URL.prototype.port`         | :white_check_mark: |         |
+| `URL.prototype.protocol`     | :white_check_mark: |         |
+| `URL.prototype.search`       | :white_check_mark: |         |
+| `URL.prototype.searchParams` | :x:                |         |
+| `URL.prototype.username`     | :x:                |         |
+| `URL.prototype.toJSON()`     | :x:                |         |
+| `URL.prototype.toString()`   | :white_check_mark: |         |
+
+[**URLSearchParams**](https://developer.mozilla.org/en/docs/Web/API/URLSearchParams)
+|                                        | Status             | Remarks |
+| -------------------------------------- | ------------------ | ------- |
+| `URLSearchParams()` constructor        | :white_check_mark: |         |
+| `URLSearchParams.prototype.size`       | :x:                |         |
+| `URLSearchParams.prototype.append()`   | :white_check_mark: |         |
+| `URLSearchParams.prototype.delete()`   | :white_check_mark: |         |
+| `URLSearchParams.prototype.entries()`  | :white_check_mark: |         |
+| `URLSearchParams.prototype.forEach()`  | :white_check_mark: |         |
+| `URLSearchParams.prototype.get()`      | :white_check_mark: |         |
+| `URLSearchParams.prototype.getAll()`   | :white_check_mark: |         |
+| `URLSearchParams.prototype.has()`      | :white_check_mark: |         |
+| `URLSearchParams.prototype.keys()`     | :white_check_mark: |         |
+| `URLSearchParams.prototype.set()`      | :white_check_mark: |         |
+| `URLSearchParams.prototype.sort()`     | :x:                |         |
+| `URLSearchParams.prototype.values()`   | :white_check_mark: |         |
+| `URLSearchParams.prototype.toString()` | :white_check_mark: |         |
+
+[**AbortController**](https://developer.mozilla.org/en/docs/Web/API/AbortController)
+`AbortController` and `AbortSignal` are implemented using the [mysticatea/abort-controller](https://github.com/mysticatea/abort-controller).
+
+|                                     | Status             | Remarks |
+| ----------------------------------- | ------------------ | ------- |
+| `AbortController()` constructor     | :white_check_mark: |         |
+| `AbortController.prototype.signal`  | :white_check_mark: |         |
+| `AbortController.prototype.abort()` | :white_check_mark: |         |
+
+[**AbortSignal**](https://developer.mozilla.org/en/docs/Web/API/AbortSignal)
+|                                               | Status             | Remarks |
+| --------------------------------------------- | ------------------ | ------- |
+| `AbortSignal.abort()`                         | :x:                |         |
+| `AbortSignal.any()`                           | :x:                |         |
+| `AbortSignal.timeout()`                       | :x:                |         |
+| `AbortSignal.prototype.aborted`               | :white_check_mark: |         |
+| `AbortSignal.prototype.reason`                | :x:                |         |
+| `AbortSignal.prototype.onabort`               | :white_check_mark: |         |
+| `AbortSignal.prototype.addEventListener()`    | :white_check_mark: |         |
+| `AbortSignal.prototype.removeEventListener()` | :white_check_mark: |         |
+| `AbortSignal.prototype.dispatchEvent()`       | :white_check_mark: |         |
+| `AbortSignal.prototype.throwIfAborted()`      | :x:                |         |
 
 ## License
 
