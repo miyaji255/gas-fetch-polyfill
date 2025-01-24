@@ -1,7 +1,7 @@
 {
   "name": "gas-fetch-polyfill",
   "description": "A fetch polyfill for Google Apps Script.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "license": "MIT",
   "packageManager": "pnpm@9.15.4",
