@@ -502,7 +502,7 @@ export function fetch(input: string | URL | Request, init?: RequestInit): Promis
       headers: Object.fromEntries(request.headers.entries()),
       contentType: request.headers.get("content-type") || undefined,
       payload: request._bodyInit,
-      muteHttpExceptions: false,
+      muteHttpExceptions: true,
     });
 
     const rawHeaders = response.getAllHeaders() as Record<string, string | string[]>;
