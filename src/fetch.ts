@@ -80,6 +80,7 @@ type HeadersInit = Headers | string[][] | Record<string, string>;
 /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Headers) */
 export class Headers {
   private _map: Record<string, string>;
+  private _setCookies: string[] = [];
 
   /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Headers/Headers) */
   constructor(headers?: HeadersInit) {
@@ -89,6 +90,8 @@ export class Headers {
       headers.forEach(function (value, name) {
         this!.append(name, value);
       }, this);
+      // コピーSet-Cookie値
+      this._setCookies = [...headers._setCookies];
     } else if (Array.isArray(headers)) {
       for (const header of headers) {
         if (header.length !== 2) {
@@ -107,29 +110,59 @@ export class Headers {
   append(name: string, value: string) {
     name = normalizeName(name);
     value = normalizeValue(value);
+
+    if (name === "set-cookie") {
+      this._setCookies.push(value);
+      return;
+    }
+
     const oldValue = this._map[name];
     this._map[name] = oldValue ? `${oldValue},${value}` : value;
   }
 
   /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Headers/delete) */
   delete(name: string) {
-    delete this._map[normalizeName(name)];
+    name = normalizeName(name);
+    if (name === "set-cookie") {
+      this._setCookies = [];
+    }
+    delete this._map[name];
   }
 
   /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Headers/get) */
   get(name: string) {
     name = normalizeName(name);
+    if (name === "set-cookie" && this._setCookies.length > 0) {
+      return this._setCookies.join(",");
+    }
     return this.has(name) ? this._map[name] : null;
+  }
+
+  /**
+   * Set-Cookieヘッダーの値を配列として取得します
+   * @returns Set-Cookieヘッダーの値の配列
+   */
+  getSetCookie(): string[] {
+    return [...this._setCookies];
   }
 
   /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Headers/has) */
   has(name: string) {
-    return this._map[normalizeName(name)] !== undefined;
+    name = normalizeName(name);
+    if (name === "set-cookie") {
+      return this._setCookies.length > 0;
+    }
+    return this._map[name] !== undefined;
   }
 
   /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Headers/set) */
   set(name: string, value: string) {
-    this._map[normalizeName(name)] = normalizeValue(value);
+    name = normalizeName(name);
+    if (name === "set-cookie") {
+      this._setCookies = [normalizeValue(value)];
+      return;
+    }
+    this._map[name] = normalizeValue(value);
   }
 
   /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Headers/forEach) */
@@ -140,12 +173,18 @@ export class Headers {
     for (const name in this._map) {
       callback.call(thisArg, this._map[name], name, this);
     }
+    if (this._setCookies.length > 0) {
+      callback.call(thisArg, this._setCookies.join(","), "set-cookie", this);
+    }
   }
 
   /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Headers/keys) */
   *keys() {
     for (const name in this._map) {
       yield name;
+    }
+    if (this._setCookies.length > 0) {
+      yield "set-cookie";
     }
   }
 
@@ -154,12 +193,18 @@ export class Headers {
     for (const name in this._map) {
       yield this._map[name];
     }
+    if (this._setCookies.length > 0) {
+      yield this._setCookies.join(",");
+    }
   }
 
   /** [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/API/Headers/entries) */
   *entries() {
     for (const name in this._map) {
       yield [name, this._map[name]];
+    }
+    if (this._setCookies.length > 0) {
+      yield ["set-cookie", this._setCookies.join(",")];
     }
   }
 
