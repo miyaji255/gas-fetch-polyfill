@@ -411,7 +411,7 @@ export class Request extends Body {
         throw new TypeError("Already read");
       }
       url = input.url;
-      if (headersInit) {
+      if (!headersInit) {
         headersInit = input.headers;
       }
       method = input.method;
